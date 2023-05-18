@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+</head>
+
+<body>
+    <script src="skulpt/cust-skulpt.js" type="text/javascript"></script>
+    <div id="errorMessage"></div>
+    <div id='canvas'></div>
+    <script>
+        var prog =
+            `start()
+######################## DO NOT EDIT ABOVE THIS LINE ###################                
+######################## PYTHON CODE BELOW ############################# 
+# Destroy alien game
+# Click on the alien ships to detroy them before they get to the platforms
+
+import random
+
+instructions = print_text('''DESTROY ALIENT GAME <br>Click on an alien ship to destroy it.
+''', 20)
+
+place_element(instructions, 800, 30)
+
+#function definitions
+
+def kill_alien(target):
+    remove_el(target)
+    global player_score
+    player_score = player_score + 1
+    update_text(p_score_text, 'Player: '+str(player_score))
+    play_audio(player_score_sound)
+    if player_score > 20:
+        scoreboard()
+
+def alien_bomb_platform():
+    global alien_score
+    alien_score = alien_score + 1
+    update_text(a_score_text, 'Aliens: '+str(alien_score))
+    if alien_score > 20:
+        scoreboard()   
+
+def scoreboard():
+    clear()
+    if player_score > 20:
+        print_heading("You win", 100) 
+        play_audio(win) 
+    else:
+        print_heading('Aliens win', 100)         
+        play_audio(lose)
+
+# Scene set up
+background_color("black")
+add_background('background.jpg')  
+
+# Add sound effects
+player_score_sound = add_sound_effect("player-explosion.mp3")
+alien_haven_score = add_sound_effect("alien-haven-score.mp3")
+win = add_sound_effect("win.mp3")
+lose = add_sound_effect("lose.mp3")
+
+# Add safe haven platforms
+p_1 = add_image("platform-1.png", 200) 
+place_element(p_1, 50, 400)
+bounce(p_1, 40) 
+
+p_2 = add_image("platform-2.png", 200) 
+place_element(p_2, 300, 450)
+bounce(p_2, 50) 
+
+p_3 = add_image("platform-3.png", 200) 
+place_element(p_3,600, 400)
+bounce(p_3, 60) 
+
+p_4 = add_image("platform-4.png", 200) 
+place_element(p_4, 900, 350)
+bounce(p_4, 50) 
+
+# list of platforms
+platforms = [p_1,p_2,p_3,p_4]
+
+# Add and animate aliens
+aliens = []
+for i in range(0,26):
+    image = add_image('alien.png', 80)
+    aliens.append(image)
+    random_x = random.randint(50,1300)
+    place_element(image, random_x, -100)
+    animate_y(image, -100, 1200, "infinite", True, 90);  
+    animate_x(image, random_x, 200, "infinite", True, 90); 
+    pause_time(.5) 
+
+# Initialize, print, and position scores  
+player_score = 0
+alien_score = 0
+p_score_text = print_text('Player: '+str(player_score), 24)
+a_score_text = print_text('Aliens: '+str(alien_score), 24)
+place_element(p_score_text, 20, 20)
+place_element(a_score_text, 20, 60)
+
+# When you click on an alien you kill it and get 1 point
+# If an alien hits a platform, aliens get 1 point  
+  
+for alien in aliens:                
+    click(alien, kill_alien)
+    for platform in platforms:
+        detect_collision(platform, alien, alien_bomb_platform)
+
+
+
+################################ PYTHON CODE ABOVE ############################# 
+################################ DO NOT EDIT BELOW THIS LINE ############################# 
+
+`;
+        readyCompiler(prog);</script>
+</body>
+
+</html>

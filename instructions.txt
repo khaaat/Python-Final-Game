@@ -1,0 +1,385 @@
+PLEASE NOTE:
+Some of the code you learned will not work in this context
+- f strings will produce an error
+- use print_text() or print_heading() instead of print()
+
+If you find other unexplained errors, please report them
+Otherwise, feel free to use what you've learned: 
+variables, functions, conditional statements, import statements, loops, lists, and dictionaries
+
+Below are the custom functions you can call to create a game 
+together with the Python you already know.
+
+Before creating your own game:
+1. Review the below functions.
+2. Play all 3 example games and look at how they're coded.
+
+...
+
+Custom Python Game Functions
+
+
+___________________TEXT __________________
+
+print_heading("Heading text", 64)
+
+Adds or updates an existing Heading
+Requirements: 2 arguments, text and size
+
+~~~~~~~~~~~
+
+print_text("text", 24)
+
+Adds a regular text element
+Requirements: 2 arguments, text and size
+
+~~~~~~~~~~~
+
+update_text(text, "Hi there")
+
+Updating a text element
+Requirements: 2 arguments, element to be updated and new text value, 
+Example:
+
+my_text = print_text("Hello world", 25)
+update_text(my_text, "Hi there")
+______________________________________________
+
+
+
+
+_________________ COLORS _____________________
+
+background_color("black")
+
+Changes the page background color
+Requirements: 1 argument, CSS color name or hex code
+*Please use an online color picker to get a CSS color name or hex code.
+______________________________________________
+
+
+
+
+_________________ IMAGES _____________________
+
+add_background("background.jpg")
+
+Add a background image
+Requirements: 1 arg, image file
+
+~~~~~~~~~~~
+
+add_image("character.png", 100)
+
+Add an image
+Requirements: 2 arguments, image file, size
+*Load images into the main folder, use simple file names
+
+~~~~~~~~~~~~~~~
+
+resize_image(image_var, 550)
+
+Resizes an image
+Requirements: 2 arguments, element, new size
+Useful for making things grow or shrink during a game
+
+cat = add_image("cat.png", 200)
+resize_image(cat, 300)
+_______________________________________________
+
+
+
+
+_______________ POSITIONING ELEMENTS __________________
+ 
+place_element(image, x, y);
+
+Positions a previously created element.
+Requirements: 3 arguments, element, x coordinate, y coordinate
+* x is the distance from the left of the screen
+* y is the distance from the top of the screen
+Example:
+
+my_image = add_image("pic.jpg", 200)
+place_element(my_image, 300, 100)
+_____________________________________________________
+
+
+
+
+_________ CONTROLS: USER MOVEMENT OF ELEMENTS _____________
+
+wasd_move(element)
+
+Allows the user to move an element with the W A S D keys
+Requirements: 1 argument, element to be movable by wasd
+Example:
+
+demo = add_image("demo.png", 50)
+wasd_move(demo)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+arrows_move(element)
+
+Allows the user to move an element with the arrow keys
+Requirements: 1 argument, element to be movable by arrow keys
+Example:
+
+demo = add_image("demo.png", 50)
+arrows_move(demo)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+cursor_move(element)
+
+Allows the user to click and drag an element using a mouse or trackpad
+Requirements: 1 argument, element to be draggable
+Example:
+
+demo = add_image("demo.png", 50)
+cursor_move(demo)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+jump(element, how_high, speed)
+
+Allows the user to click to make an element jump up and down 
+Requirements: 3 arguments, element to make jump, height of jump, speed of jump
+Example:
+
+demo = add_image("demo.png", 50)
+jump(demo, 200, 150)
+_________________________________________________________
+
+
+
+
+_______________ ANIMATIING ELEMENTS _____________________
+
+bounce(el, scale)
+
+Bounces an element up and down, continuously.
+Requirements: 2 arguments, element, scale
+Example:
+
+demo = add_image("ball.png", 30)
+bounce(demo, 20)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+animate_x(el, initialx, finalx, turns, alternate, speed)
+
+Animates an element horizontaly.
+Requirements: 6 arguments
+1. element to be animated, 
+2. starting point x value, 
+3. stopping point x value, 
+4. number of repititions: can be a number or this string "infinite", 
+5. boolean to alternate, meaning to reverse on each repitition or not, 
+6. speed of animation
+
+Example:
+demo = add_image("ball.png", 30)
+animate_x(demo, 20, 80, 2, False, 100)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+animate_y(el, initialy, finaly, turns, alternate, speed)
+
+Animates an element horizontaly.
+Requirements: 6 arguments
+1. element to be animated, 
+2. starting point y value, 
+3. stopping point y value, 
+4. number of repititions: can be a number or this string "infinite", 
+5. boolean to alternate, meaning to reverse on each repitition or not, 
+6. speed of animation
+
+Example:
+
+demo = add_image("ball.png", 30)
+animate_y(demo, 10, 90, "infinite", True, 100)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+animate_y_rotate(el, 'position', turns, speed)
+
+Makes an element pop up from the bottom of a screen and go back again, while rotating
+Requirements: 4 arguements, element to be animated, string screen position "left", "center" or "right"
+Number of turns, speed of animation
+Example:
+
+demo = add_image("ball.png", 30)
+animate_y_rotate(demo, 'center', 2, 100)
+___________________________________________________________
+
+
+
+
+_______________ DETECTING COLLISIONS _____________________
+
+detect_collision(element, target, function)
+
+Detects a collision between 2 elements
+Requirements: 3 arguments, element, target element, function called at collision
+Example:
+
+bullet = add_image("bullet.png", 20)
+target = add_image("target.png", 50)
+def destroy():
+    //code
+detect_collision(bullet, target, destroy);
+_________________________________________________________
+
+
+
+
+_______________ REMOVING ELEMENTS _____________________
+
+remove_el(element)
+
+Removes an element from the screen
+Requirements: 1 argument, element to be removed
+Example:
+
+demo = add_image("demo.png", 20)
+remove_el(demo)
+_______________________________________________________
+
+
+
+
+_________________ CLICKING ON AN ELEMENT ___________________
+
+click(target, function)
+
+Calls a function on user click of an element
+Requirements: 2 arguments, element ot clicked on, function to call on click
+Example:
+
+def die(target):
+    remove_el(target)
+demo = add_image("demo.png", 300) 
+click(demo, die) 
+_________________________________________________________ 
+
+
+
+
+____________________ TIMING DELAY ______________________
+
+pause_time(time)
+
+Delays an animation for the specifide time
+Requirements: 1 argument, time to delay in seconds
+Example:
+
+pause_time(2)
+_______________________________________________________
+
+
+
+_________________ GET THE POSITION OF AN ELEMENT _______________
+
+get_x_pos(element)
+
+Gets the x position of an existing element
+x is the horiztonal value, the distance from the left side of the screen
+Requirements: 1 argument, element
+Example:
+
+demo = add_image("demo.png", 300)
+get_x_pos(demo)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+get_y_pos(element)
+
+Gets the y position of an existing element
+y is the vertical value, the distance from the top of the screen
+Requirements: 1 argument, element
+Example:
+
+demo = add_image("demo.png", 300)
+get_y_pos(demo)
+_______________________________________________
+
+
+
+
+___________________ CLEAR THE GAME BOARD _______________
+
+clear()
+
+Clears all elements from the game
+Requirements: 0 arguments
+Example:
+
+clear()
+_______________________________________________
+
+
+
+
+_______________________ SOUND/AUDIO ________________________
+
+add_audio("string")
+
+Auto-plays and loops a soundtrack
+Requirements: 1 argument, an audio file name
+Example:
+
+add_audio("song.mp3")
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+add_sound_effect("string")
+
+Adds a sound clip to be played later
+Requirements: 1 argument, an audio file name
+Example:
+
+add_sound_effect("beep.mp3")
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+play_audio(element)
+
+Plays a preloaded sound effect or audio file
+Requirements: 1 argument, sound element to be played
+Example:
+
+demo = add_sound_effect("demo.mp3")
+play_audio(demo)
+______________________________________________
+
+
+
+
+___________________ INPUTS _____________________
+
+input("string")
+
+Gets a string input from the user, identical to the Python function input()
+Requirements: 1 argument, a string to prompt the user what to type
+Example:
+
+input("Enter your name")
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+input_num("string")
+
+Gets a number from the user, 
+like using input but auto converting the output to an integer
+Requirements: 1 argument, a string to promopt the user what to type
+Example:
+
+input_num("Enter your age")
+_________________________________________________
+
+
+
+
+____________________ BUTTONS ________________________
+
+add_button("string")
+
+Adds a button to the screen
+Requirements: 1 argument, a string of the text to show on the button
+Example:
+
+add_button("Submit")
+______________________________________________________
+

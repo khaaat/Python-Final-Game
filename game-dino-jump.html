@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-3.0.0.min.js"></script>
+</head>
+
+<body>
+    <script src="skulpt/cust-skulpt.js" type="text/javascript"></script>
+    <div id="errorMessage"></div>
+    <div id='canvas'></div>
+    <script>
+        var prog =
+            `start()
+######################## DO NOT EDIT ABOVE THIS LINE ###################                
+######################## PYTHON CODE BELOW #############################                 
+
+# Dino jump game
+# If the dino jumps over all the asteroids, you win!
+
+instructions = print_text('''DINO JUMP GAME <br>WASD to move. <br >Click to jump.
+''', 20)
+
+place_element(instructions, 20, 20)
+   
+def remove_thing(target):
+    remove_el(target)
+
+click(instructions, remove_thing)
+
+def extinction():
+    clear()
+    print_heading('You lose!', 48)
+    play_audio(explode)
+
+def player_victory():
+    clear()
+    print_heading('You win!', 48)
+
+# Create scene
+background_color("black")
+add_background('desert-bg.jpg')
+bg_music = add_audio("background.mp3")
+
+player_dino = add_image('dino.gif', 300)
+place_element(player_dino, 40, 500)
+wasd_move(player_dino) 
+jump(player_dino, 400, 1000)
+
+wall = add_image('wall.png', 80)
+place_element(wall, -80, 400)
+
+# Add and animate asteroids
+asteroids = []
+for i in range(0,10):
+    image = add_image('asteroid.png', 120)
+    asteroids.append(image)
+    place_element(image, 1200, 550)
+    animate_x(image, 1200, -80, 1, False, 450); 
+    pause_time(2.5) 
+
+#Add the last asteroid    
+last_asteroid = add_image('asteroid.png', 80)
+asteroids.append(last_asteroid)
+place_element(last_asteroid, 1200, 550)
+animate_x(last_asteroid, 1200, -80, 1, False, 450); 
+
+# If an asteroid hits the dino, you lose
+for asteroid in asteroids:                
+    detect_collision(player_dino, asteroid, extinction)
+
+#If the last asteroid hits the wall, you win!    
+detect_collision(wall, last_asteroid, player_victory)
+
+
+
+
+################################ PYTHON CODE ABOVE ############################# 
+################################ DO NOT EDIT BELOW THIS LINE ############################# 
+
+`;
+        readyCompiler(prog);</script>
+</body>
+
+</html>
