@@ -8,8 +8,9 @@ cfa_final_game_code = `
 #  - Do not change any code outside of the designated area 
 
 
-
 ################################ PYTHON CODE ABOVE ################################
+
+print("hello word")
 
 ########################### DO NOT EDIT BELOW THIS LINE ###########################
 `
