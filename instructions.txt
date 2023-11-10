@@ -165,8 +165,7 @@ bounce(demo, 20)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 animate_x(el, initialx, finalx, turns, alternate, speed)
-
-Animates an element horizontaly.
+Animates an element horizontaly. 
 Requirements: 6 arguments
 1. element to be animated, 
 2. starting point x value, 
