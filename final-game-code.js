@@ -10,7 +10,7 @@ cfa_final_game_code = `
 
 ################################ PYTHON CODE ABOVE ################################
 
-print("hello word")
+print("hello world")
 
 ########################### DO NOT EDIT BELOW THIS LINE ###########################
 `
